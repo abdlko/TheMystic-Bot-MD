@@ -5,10 +5,16 @@ import {instagram} from '@xct007/frieren-scraper';
 import {instagramdl} from '@bochilteam/scraper';
 import instagramDl from '@sasmeee/igdl';
 import {fileTypeFromBuffer} from 'file-type';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.descargas_instagram
+
+
 
 const handler = async (m, {conn, args, command, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.descargas_instagram
+
+
   if (!args[0]) throw `${tradutor.texto1} _${usedPrefix + command} https://www.instagram.com/reel/Cc0NuYBg8CR/?utm_source=ig_web_copy_link_`;
   m.reply(global.wait);
   try {

@@ -1,8 +1,13 @@
 /* 𝐂𝐑𝐄𝐀𝐃𝐎 𝐏𝐎𝐑 https://github.com/BrunoSobrino */
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.convertidor_togifaud
+
 
 const handler = async (m, {conn, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.convertidor_togifaud
+
+
   if (!m.quoted) throw `*${tradutor.texto1}*`;
   const q = m.quoted || m;
   const mime = (q.msg || q).mimetype || '';

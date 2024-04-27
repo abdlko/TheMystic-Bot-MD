@@ -1,7 +1,10 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.grupos_eliminar
 
 const handler = async (m, {conn, participants, command, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.grupos_eliminar
+
   if (!global.db.data.settings[conn.user.jid].restrict) throw `${tradutor.texto1[0]} (*_restrict_*), ${tradutor.texto1[1]}`;
   const kicktext = `${tradutor.texto2} _${usedPrefix + command} @${global.suittag}_`;
   if (!m.mentionedJid[0] && !m.quoted) return m.reply(kicktext, m.chat, {mentions: conn.parseMention(kicktext)});

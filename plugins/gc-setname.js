@@ -1,8 +1,12 @@
 import Presence from '@whiskeysockets/baileys';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.gc_setname
+
 
 const handler = async (m, {conn, args, text}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.gc_setname
+
   if (!text) throw tradutor.texto1;
   try {
     const text = args.join` `;

@@ -1,7 +1,10 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.gc_config
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.gc_config
+
   const isClose = { // Switch Case Like :v
     'open': 'not_announcement',
     'close': 'announcement',

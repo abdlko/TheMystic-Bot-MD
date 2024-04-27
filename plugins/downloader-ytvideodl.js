@@ -1,9 +1,12 @@
 import ytdl from 'ytdl-core';
 import fs from 'fs';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.downloader_ytvideodl
 
 const handler = async (m, {conn, args, isPrems, isOwner, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.downloader_ytvideodl
+
   const getRandom = (ext) => {
     return `${Math.floor(Math.random() * 10000)}${ext}`;
   };

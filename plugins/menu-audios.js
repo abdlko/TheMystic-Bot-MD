@@ -1,11 +1,14 @@
 import fetch from 'node-fetch';
-import _translate from './_translate.js';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.menu_audios
+
 
 
 
 const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.menu_audios
+
   try {
     const pp = imagen4;
     // let vn = './media/menu.mp3'

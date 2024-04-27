@@ -1,7 +1,11 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.herramientas_calc
+
 
 const handler = async (m, {conn, text}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.herramientas_calc
+
   const id = m.chat;
   conn.math = conn.math ? conn.math : {};
   if (id in conn.math) {

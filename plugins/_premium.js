@@ -1,9 +1,14 @@
-import _translate from "./_translate.js";
-const tradutor = _translate.plugins._premium
+
+  
 
 const handler = (m) => m;
 
 export async function all(m) {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins._premium
+
   for (const user of Object.values(global.db.data.users)) {
     if (user.premiumTime != 0 && user.premium) {
       if (new Date() * 1 >= user.premiumTime) {

@@ -1,8 +1,12 @@
 import {search, download} from 'aptoide-scraper';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.downloader_modapk
 
 const handler = async (m, {conn, usedPrefix: prefix, command, text}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.downloader_modapk
+
+
  if (!text) throw `${tradutor.texto1}`;
   try {    
     const searchA = await search(text);

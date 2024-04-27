@@ -2,10 +2,14 @@
 import fs from 'fs';
 import fetch from 'node-fetch';
 import {googleImage} from '@bochilteam/scraper';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.buscador_stickersearch
+
 
 const handler = async (m, {text, usedPrefix, command, conn}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.buscador_stickersearch
+
   try {
     const res2 = await googleImage(text);
     const sfoto = res2.getRandom();

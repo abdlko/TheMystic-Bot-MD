@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.descargas_play_v2
+
 
 let data;
 let buff;
@@ -9,6 +8,11 @@ let fileName;
 let apiUrl;
 let enviando = false;
 const handler = async (m, { command, usedPrefix, conn, text }) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.descargas_play_v2
+
   if (!text) throw `${tradutor.texto1[0]} _${usedPrefix + command} ${tradutor.texto1[1]} _${usedPrefix + command} https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p_`;
 if (enviando) return;
     enviando = true
@@ -64,7 +68,7 @@ if (enviando) return;
        }
     }
 
-    const dataMessage = `${tradutor.texto4[0]} ${data.resultado.title}\n\n${tradutor.texto4[0]} ${data.resultado.publicDate}\n\n${tradutor.texto4[0]} ${data.resultado.channel}\n\n${tradutor.texto4[0]} ${data.resultado.url}`;
+    const dataMessage = `${tradutor.texto4[0]} ${data.resultado.title}\n${tradutor.texto4[1]} ${data.resultado.publicDate}\n${tradutor.texto4[2]} ${data.resultado.channel}\n${tradutor.texto4[3]} ${data.resultado.url}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {

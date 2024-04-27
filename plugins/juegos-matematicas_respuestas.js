@@ -1,8 +1,12 @@
 global.math = global.math ? global.math : {};
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.juegos_matematicas_respuestas
 
-const handler = async (m, {conn}) => {
+
+const handler = async (m, { conn }) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.juegos_matematicas_respuestas
+
   const id = m.chat;
   if (!m.quoted) return;
   if (!/jrU022n8Vf/i.test(m.quoted.text)) return;

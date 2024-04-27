@@ -1,17 +1,25 @@
 import fs from 'fs';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.game_acertijo
+
 
 const timeout = 60000;
 const poin = 500;
 const handler = async (m, {conn, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.game_acertijo
+
+
   conn.tekateki = conn.tekateki ? conn.tekateki : {};
   const id = m.chat;
   if (id in conn.tekateki) {
     conn.reply(m.chat, tradutor.texto1, conn.tekateki[id][0]);
     throw false;
   }
-  const tekateki = JSON.parse(fs.readFileSync(`./src/game/acertijo.json`));
+  const tekateki = tradutor.texto4;
+  /*Para agregar más preguntas vaya a la carpeta de language en el archivo json de su 
+  idioma preferido, busque "acertijo" justo después del texto4 puede agregar sus preguntas*/
+  
   const json = tekateki[Math.floor(Math.random() * tekateki.length)];
   const _clue = json.response;
   const clue = _clue.replace(/[A-Za-z]/g, '_');

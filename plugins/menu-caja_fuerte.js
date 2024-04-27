@@ -1,7 +1,10 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.menu_caja_fuerte
 
 const handler = async (m, {conn, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.menu_caja_fuerte
+
   const pp = imagen4;
   try {
   } catch (e) {

@@ -1,10 +1,14 @@
 /* ⚠ POR FAVOR NO MODIFIQUES NADA DE AQUÍ ⚠ */
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.info_donar
+
 
 import {generateWAMessageFromContent} from '@whiskeysockets/baileys';
 import fs from 'fs';
 const handler = async (m, {conn, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.info_donar
+
   const name = await conn.getName(m.sender);
   const donar =`
 *┏ ┅ ━━━━━━━━━━━━━━━━━ ┅ ━*

@@ -1,8 +1,12 @@
 /* Creditos a https://github.com/FG98F */
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.gc_delete
+
 
 const handler = async (m, {conn, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.gc_delete
+
   if (!m.quoted) throw tradutor.texto1;
   try {
     const delet = m.message.extendedTextMessage.contextInfo.participant;

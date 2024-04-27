@@ -1,8 +1,12 @@
 import {Maker} from 'imagemaker.js';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.maker_ephoto360
+
 
 const handler = async (m, {conn, args, command, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.maker_ephoto360
+
   const response = args.join(' ').split('|');
   if (!args[0]) throw tradutor.texto1;
   if (command == 'logocorazon') {

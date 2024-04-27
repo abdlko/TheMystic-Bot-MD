@@ -1,10 +1,14 @@
 import {unlinkSync, readFileSync} from 'fs';
 import {join} from 'path';
 import {exec} from 'child_process';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.audio_efectos
+
 
 const handler = async (m, {conn, args, __dirname, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.audio_efectos
+
   try {
     const q = m.quoted ? m.quoted : m;
     const mime = ((m.quoted ? m.quoted : m.msg).mimetype || '');

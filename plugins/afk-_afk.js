@@ -1,7 +1,13 @@
-import _translate from "./_translate.js";
-const tradutor = _translate.plugins.afk__afk
+
+
+
 
 export function before(m) {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.afk__afk
+
   const user = global.db.data.users[m.sender];
   if (user.afk > -1) {
     m.reply(` ${tradutor.texto2[0]} ${user.afkReason ? `${tradutor.texto2[1]}` + user.afkReason : ''}*

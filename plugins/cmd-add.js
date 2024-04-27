@@ -1,7 +1,11 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.cmd_add
+
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.cmd_add
+
   global.db.data.sticker = global.db.data.sticker || {};
   if (!m.quoted) throw `*${tradutor.texto1}*`;
   if (!m.quoted.fileSha256) throw `*${tradutor.texto2}*`;

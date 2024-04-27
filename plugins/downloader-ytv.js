@@ -4,10 +4,14 @@ import yts from 'yt-search';
 import ytdl from 'ytdl-core';
 import axios from 'axios';
 import {bestFormat, getUrlDl} from '../lib/y2dl.js';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.downloader_ytv
+
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.downloader_ytv
+
   if (!args[0]) throw tradutor.texto1;
   let enviando;
   if (enviando) return  

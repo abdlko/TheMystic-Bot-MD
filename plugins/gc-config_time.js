@@ -1,8 +1,12 @@
 /* Creditos a https://github.com/ALBERTO9883/NyanCatBot-MD */
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.gc_config_time
+
 
 const handler = async (m, {conn, isAdmin, isOwner, args, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.gc_config_time
+
   if (!(isAdmin || isOwner)) {
 	  global.dfail('admin', m, conn);
     throw false;

@@ -1,8 +1,11 @@
 import fetch from 'node-fetch';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.info_covid
 
 const handler = async (m, {text, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.info_covid
+
   if (!text) throw `${tradutor.texto1} ${usedPrefix + command} Mexico*`;
   const res = await fetch(global.API('https://covid19.mathdro.id', '/api/countries/'+ (text)));
   if (!res.ok) throw await res.text();

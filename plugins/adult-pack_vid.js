@@ -1,8 +1,13 @@
 import fetch from 'node-fetch';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.adult_pack_vid
+
 
 const handler = async (m, {conn, command, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.adult_pack_vid
+
+
   if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1}`;
   switch (command) {
     case 'pack':

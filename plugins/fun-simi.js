@@ -1,10 +1,14 @@
 import translate from '@vitalets/google-translate-api';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.fun_simi
+
 
 
 import fetch from 'node-fetch';
 const handler = async (m, {text, command, args, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.fun_simi
+
   if (!text) throw `${tradutor.texto1} ${usedPrefix + command} Hola bot*`;
   try {
     const api = await fetch('https://api.simsimi.net/v2/?text=' + text + '&lc=es');

@@ -1,9 +1,13 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.herramientas_readviewonce
+
 
 const {downloadContentFromMessage} = (await import('@whiskeysockets/baileys'));
 
 const handler = async (m, {conn}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.herramientas_readviewonce
+
   if (!m.quoted) throw tradutor.texto1;
   if (m.quoted.mtype !== 'viewOnceMessageV2') throw tradutor.texto2;
   const msg = m.quoted.message;

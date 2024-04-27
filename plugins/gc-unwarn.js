@@ -1,7 +1,11 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.gc_unwarn
+
 
 const handler = async (m, {conn, text, command, usedPrefix}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.gc_unwarn
+
   const pp = './src/warn.jpg';
   let who;
   if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text;

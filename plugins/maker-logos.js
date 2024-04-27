@@ -1,11 +1,15 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import FormData from "form-data";
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.maker_logos
+
 
 const split = '|';
 const handler = async (m, {conn, args: [effect], text: txt, usedPrefix, command, name}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.maker_logos
+
   if (!effect) throw tradutor.texto1 + effects.map((v) => v.title).join('\n° ඬ⃟📝 #logo ');
   if (!effects.find((v) => (new RegExp(v.title, 'gi')).test(effect))) throw `${tradutor.texto2[0]} ${effect} ${tradutor.texto2[1]}`;  
   let text = txt.replace(new RegExp(effect, 'gi'), '').trimStart();

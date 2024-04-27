@@ -1,8 +1,13 @@
 import {pinterest} from '@bochilteam/scraper';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.downloader_pinterest
+
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.downloader_pinterest
+
+
   if (!text) throw `${tradutor.texto1} ${usedPrefix + command} Minecraft*`;
   const json = await pinterest(text);
   conn.sendFile(m.chat, json.getRandom(), 'error.jpg', `

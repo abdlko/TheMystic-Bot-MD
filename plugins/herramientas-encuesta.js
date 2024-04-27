@@ -1,7 +1,11 @@
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.herramientas_encuesta
+
 
 const handler = async (m, {conn, text, args, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.herramientas_encuesta
+
   let name = await conn.getName(m.sender);
   if (name == 'undefined') name = 'Indefinido';
   const b = text.split('|');

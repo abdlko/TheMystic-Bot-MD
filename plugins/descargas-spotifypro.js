@@ -6,10 +6,14 @@ const { downloadTrack, downloadAlbum, search } = pkg;
 import fetch from 'node-fetch';
 import pkg2 from 'fluid-spotify.js';
 const { Spotify } = pkg2;
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.descargas_spotifypro
+
 
 const handler = async (m, { conn, text }) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.descargas_spotifypro
+
  if (!text) throw `${tradutor.texto1}`; 
  const isSpotifyUrl = text.match(/^(https:\/\/open\.spotify\.com\/(album|track|playlist)\/[a-zA-Z0-9]+)/i);
  if (!isSpotifyUrl && !text) throw `${tradutor.texto2}`;

@@ -1,9 +1,15 @@
 import yts from 'yt-search';
 import fs from 'fs';
-import _translate from "./_translate.js"
-const tradutor = _translate.plugins.downloader_playlist
+
+
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.downloader_playlist
+
+
   if (!text) throw `${tradutor.texto1} \n*${usedPrefix + command} Begin you*`;
   try {
     const vids_ = {

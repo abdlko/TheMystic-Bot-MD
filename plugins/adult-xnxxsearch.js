@@ -1,8 +1,12 @@
 import fetch from 'node-fetch';
-import _translate from './_translate.js';
-const tradutor = _translate.plugins.adult_xnxxsearch
 
 const handler = async (m, {text, usedPrefix, command}) => {
+  const datas = global
+  const idioma = datas.db.data.users[m.sender].language
+  const _translate = JSON.parse(fs.readFileSync(`./language/${idioma}.json`))
+  const tradutor = _translate.plugins.adult_xnxxsearch
+
+
 if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1} ${usedPrefix}enable modohorny*`;   
   if (!text) throw `${tradutor.texto2} ${usedPrefix + command} Con mi prima*`;
   try {
